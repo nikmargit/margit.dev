@@ -1,3 +1,7 @@
+---
+const { width = 70 } = Astro.props;
+---
+
 <svg viewBox="0 0 342.6 169.801" xmlns="http://www.w3.org/2000/svg"
   ><g
     id="svgGroup"
@@ -13,3 +17,8 @@
       vector-effect="non-scaling-stroke"></path></g
   ></svg
 >
+<style define:vars={{ width }}>
+  svg {
+    width: var(--width);
+  }
+</style>
