@@ -3,6 +3,23 @@ import HeaderLink from "./HeaderLink.astro";
 import LogoSVG from "./LogoSVG.astro";
 ---
 
+<script>
+  const COLOR_MODE_LS_KEY = "color-mode";
+
+  const check = document.getElementById(
+    "light-dark-toggle"
+  ) as HTMLInputElement;
+  const isChecked = window.localStorage.getItem(COLOR_MODE_LS_KEY);
+
+  if (isChecked === "dark") {
+    check.checked = true;
+  }
+
+  check?.addEventListener("change", (e) => {
+    const checked = (e.target as HTMLInputElement).checked;
+    localStorage.setItem(COLOR_MODE_LS_KEY, checked ? "dark" : "light");
+  });
+</script>
 <header>
   <nav>
     <h2>
@@ -16,7 +33,12 @@ import LogoSVG from "./LogoSVG.astro";
       <HeaderLink href="/blog">Blog</HeaderLink>
       <HeaderLink href="/about">About</HeaderLink>
     </div>
-    <div>Dark mode</div>
+    <div>
+      <label>
+        <input type="checkbox" id="light-dark-toggle" />
+         Dark mode
+      </label>
+    </div>
   </nav>
 </header>
 <style>
@@ -52,9 +74,4 @@ import LogoSVG from "./LogoSVG.astro";
     text-decoration: none;
     border-bottom-color: var(--accent);
   }
-  /* @media (max-width: 720px) {
-    .social-links {
-      display: none;
-    }
-  } */
 </style>
