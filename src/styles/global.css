@@ -1,6 +1,7 @@
 :root {
   --accent: #2337ff;
   --accent-dark: #000d8a;
+  --color-text: "red";
   --black: 15, 18, 25;
   --gray: 96, 115, 159;
   --gray-light: 229, 233, 240;
@@ -44,7 +45,7 @@ h4,
 h5,
 h6 {
   margin: 0 0 0.5rem 0;
-  color: rgb(var(--black));
+  color: var(--color-text);
   line-height: 1.2;
   text-transform: lowercase;
 }
