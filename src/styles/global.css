@@ -1,7 +1,6 @@
 :root {
   --accent: #2337ff;
   --accent-dark: #000d8a;
-  --color-text: "red";
   --black: 15, 18, 25;
   --gray: 96, 115, 159;
   --gray-light: 229, 233, 240;
@@ -17,6 +16,15 @@
   font-weight: normal;
   font-style: normal;
   font-display: swap;
+}
+[data-theme="light"] {
+  --color-text: lightgray;
+  --toggle-transform: translateY(-50%);
+}
+
+[data-theme="dark"] {
+  --color-text: blue;
+  --toggle-transform: translateY(0%);
 }
 
 body {
