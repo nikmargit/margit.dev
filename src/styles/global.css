@@ -20,11 +20,13 @@
 [data-theme="light"] {
   --color-text: lightgray;
   --toggle-transform: translateY(-50%);
+  --toggle-background: #87cefa;
 }
 
 [data-theme="dark"] {
   --color-text: blue;
   --toggle-transform: translateY(0%);
+  --toggle-background: rgb(39, 83, 107);
 }
 
 body {
