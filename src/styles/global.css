@@ -74,7 +74,7 @@ b {
 }
 a {
   color: var(--color-text);
-  text-decoration-color: var(--color-accent);
+  text-decoration: underline var(--color-accent);
 }
 
 p {
