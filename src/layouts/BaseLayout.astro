@@ -6,12 +6,42 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 import "@fontsource/atkinson-hyperlegible";
 ---
 
-<!doctype html>
-<html lang="en">
+<html lang="en" data-theme="light">
   <head>
     <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+    <link
+      rel="preload"
+      href="/Atkinson-Hyperlegible-Regular.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
   </head>
   <body>
+    <script is:inline>
+      function getInitialColorMode() {
+        const persistedColorPreference =
+          window.localStorage.getItem("color-mode");
+        const hasPersistedPreference =
+          typeof persistedColorPreference === "string";
+
+        if (hasPersistedPreference) {
+          return persistedColorPreference;
+        }
+
+        const mql = window.matchMedia("(prefers-color-scheme: dark)");
+        const hasMediaQueryPreference = typeof mql.matches === "boolean";
+        if (hasMediaQueryPreference) {
+          return mql.matches ? "dark" : "light";
+        }
+
+        return "light";
+      }
+
+      document
+        .querySelector("html")
+        .setAttribute("data-theme", getInitialColorMode());
+    </script>
     <Header title={SITE_TITLE} />
     <main>
       <slot />
@@ -19,7 +49,6 @@ import "@fontsource/atkinson-hyperlegible";
     <Footer />
     <style>
       body {
-        font-family: "Atkinson Hyperlegible", sans-serif;
         min-height: 100vh;
         display: flex;
         flex-direction: column;

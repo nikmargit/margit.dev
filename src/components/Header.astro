@@ -1,6 +1,7 @@
 ---
 import HeaderLink from "./HeaderLink.astro";
 import LogoSVG from "./LogoSVG.astro";
+import ColorModeToggleButton from "./ColorModeToggleButton.astro";
 ---
 
 <header>
@@ -12,19 +13,19 @@ import LogoSVG from "./LogoSVG.astro";
       </a>
     </h2>
     <div class="internal-links">
-      <HeaderLink href="/">Home</HeaderLink>
-      <HeaderLink href="/blog">Blog</HeaderLink>
-      <HeaderLink href="/about">About</HeaderLink>
+      <HeaderLink href="/">home</HeaderLink>
+      <HeaderLink href="/blog">blog</HeaderLink>
+      <HeaderLink href="/about">about</HeaderLink>
     </div>
-    <div>Dark mode</div>
+    <div>
+      <ColorModeToggleButton />
+    </div>
   </nav>
 </header>
 <style>
   header {
     margin: 0;
     padding: 0 1em;
-    background: white;
-    box-shadow: 0 2px 8px rgba(var(--black), 5%);
   }
   h2 {
     margin: 0;
@@ -50,11 +51,6 @@ import LogoSVG from "./LogoSVG.astro";
   }
   nav a.active {
     text-decoration: none;
-    border-bottom-color: var(--accent);
+    border-bottom-color: var(--color-accent);
   }
-  /* @media (max-width: 720px) {
-    .social-links {
-      display: none;
-    }
-  } */
 </style>
