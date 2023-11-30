@@ -1,15 +1,17 @@
 [data-theme="light"] {
   --color-text: #000;
-  --color-background: #fff;
-  --color-accent: #525fe1;
+  --color-background: #ecebf2;
+  --color-accent: #41337a;
+  --color-highlight: #c6c2d7;
   --toggle-transform: translateY(-50%);
   --toggle-background: #87cefa;
 }
 
 [data-theme="dark"] {
   --color-text: #fff;
-  --color-background: #000;
-  --color-accent: #525fe1;
+  --color-background: #0d0a18;
+  --color-accent: #7a70a2;
+  --color-highlight: #675c95;
   --toggle-transform: translateY(0%);
   --toggle-background: rgb(39, 83, 107);
 }
