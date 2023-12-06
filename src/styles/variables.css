@@ -1,17 +1,15 @@
+:root {
+  --max-width: 1240px;
+}
+
 [data-theme="light"] {
   --color-text: #000;
-  --color-background: #fff;
-  --color-accent: #fbbf5d;
-  --color-highlight: #fde5be;
   --toggle-transform: translateY(-50%);
   --toggle-background: #ecebf2;
 }
 
 [data-theme="dark"] {
   --color-text: #fff;
-  --color-background: #191309;
-  --color-accent: #fbbf5d;
-  --color-highlight: #b08641;
   --toggle-transform: translateY(0%);
   --toggle-background: #000;
 }

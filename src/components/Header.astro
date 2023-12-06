@@ -9,7 +9,7 @@ import ColorModeToggleButton from "./ColorModeToggleButton.astro";
     <h2>
       <a href="/">
         <span class="sr-only">Go to homepage</span>
-        <LogoSVG class="nav-logo" width="70px" />
+        <LogoSVG class="nav-logo" size="70px" />
       </a>
     </h2>
     <nav>
@@ -29,7 +29,7 @@ import ColorModeToggleButton from "./ColorModeToggleButton.astro";
     align-items: center;
     padding-inline: 1em;
     width: 100%;
-    max-width: 900px;
+    max-width: var(--max-width);
     margin: auto;
   }
   header > div {
@@ -46,28 +46,14 @@ import ColorModeToggleButton from "./ColorModeToggleButton.astro";
     gap: 1rem;
   }
   nav a {
-    /* padding: 1em 0.5em; */
     color: var(--black);
     text-decoration: none;
     font-size: 1.4rem;
   }
   nav a.active {
-    text-decoration: none;
+    text-decoration: underline;
     font-weight: normal;
     position: relative;
-    /* font-weight: bold; */
-  }
-
-  nav a.active::before {
-    content: "";
-    background-color: var(--color-highlight);
-    position: absolute;
-    left: 0.5rem;
-    bottom: 5px;
-    width: 100%;
-    height: 8px;
-    z-index: -1;
-    transition: all 0.3s ease-in-out;
   }
 
   @media screen and (min-width: 768px) {
