@@ -5,8 +5,7 @@ body {
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-size: cover;
-  background: #a1ffce;
-  background: linear-gradient(to right, #faffd1, #a1ffce);
+  background-image: linear-gradient(to right, #faffd1, #a1ffce);
 
   text-align: left;
   color: var(--color-text);
