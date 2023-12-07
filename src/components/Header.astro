@@ -28,6 +28,7 @@ import ColorModeToggleButton from "./ColorModeToggleButton.astro";
     justify-content: space-between;
     align-items: center;
     padding-inline: 1em;
+    padding-top: 0.5rem;
     width: 100%;
     max-width: var(--max-width);
     margin: auto;
@@ -43,17 +44,7 @@ import ColorModeToggleButton from "./ColorModeToggleButton.astro";
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 1rem;
-  }
-  nav a {
-    color: var(--black);
-    text-decoration: none;
-    font-size: 1.4rem;
-  }
-  nav a.active {
-    text-decoration: underline;
-    font-weight: normal;
-    position: relative;
+    gap: 2rem;
   }
 
   @media screen and (min-width: 768px) {
@@ -66,7 +57,6 @@ import ColorModeToggleButton from "./ColorModeToggleButton.astro";
     h2 a,
     h2 a.active {
       text-decoration: none;
-      padding: 1em 0.5em;
       display: flex;
     }
   }
