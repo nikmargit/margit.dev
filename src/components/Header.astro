@@ -5,22 +5,22 @@ import ColorModeToggleButton from "./ColorModeToggleButton.astro";
 ---
 
 <header>
-  <div>
-    <h2>
-      <a href="/">
-        <span class="sr-only">Go to homepage</span>
-        <LogoSVG class="nav-logo" size="70px" />
-      </a>
-    </h2>
-    <nav>
+  <nav>
+    <div class="nav-wrapper">
+      <h2>
+        <a href="/">
+          <span class="sr-only">Go to homepage</span>
+          <LogoSVG class="nav-logo" size="70px" />
+        </a>
+      </h2>
       <HeaderLink href="/">home</HeaderLink>
       <HeaderLink href="/blog">blog</HeaderLink>
       <HeaderLink href="/about">about</HeaderLink>
-    </nav>
-  </div>
-  <div>
-    <ColorModeToggleButton />
-  </div>
+    </div>
+    <div>
+      <ColorModeToggleButton />
+    </div>
+  </nav>
 </header>
 <style>
   header {
@@ -28,32 +28,42 @@ import ColorModeToggleButton from "./ColorModeToggleButton.astro";
     justify-content: space-between;
     align-items: center;
     padding-inline: 1em;
-    padding-top: 0.5rem;
+    /* padding-top: 0.5rem; */
+    width: 100%;
+    background: var(--color-accent);
+    background-image: url(/grain.png);
+    padding-block: 0.5rem 0.8rem;
+    --mask: radial-gradient(
+          7.87px at 50% calc(100% - 11.1px),
+          #000 99%,
+          #0000 101%
+        )
+        calc(50% - 12px) 0/24px 100%,
+      radial-gradient(7.87px at 50% calc(100% + 5.1px), #0000 99%, #000 101%)
+        50% calc(100% - 6px) / 24px 100% repeat-x;
+    -webkit-mask: var(--mask);
+    mask: var(--mask);
+  }
+  .nav-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+  }
+  nav {
+    display: flex;
     width: 100%;
     max-width: var(--max-width);
     margin: auto;
-  }
-  header > div {
-    display: flex;
-  }
-  h2 {
-    display: none;
-  }
-
-  nav {
-    display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 2rem;
   }
+  h2 {
+    margin: 0;
+  }
 
   @media screen and (min-width: 768px) {
-    h2 {
-      display: block;
-      margin: 0;
-      margin-right: 2rem;
-      font-size: 1em;
-    }
     h2 a,
     h2 a.active {
       text-decoration: none;

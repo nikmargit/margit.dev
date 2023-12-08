@@ -1,19 +1,17 @@
 body {
   margin: 0;
   padding: 0;
-  background: #333;
+  background: #fff;
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-size: cover;
-  background-image: linear-gradient(to right, #faffd1, #a1ffce);
-
   text-align: left;
   color: var(--color-text);
-  font-size: 22px;
-  font-family: "Atkinson Hyperlegible", sans-serif;
+  font-size: 20px;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  font-family: "Inter", sans-serif;
 }
 main {
   padding: 3em 1em;
@@ -31,6 +29,7 @@ h6 {
   color: var(--color-text);
   line-height: 1.2;
   font-weight: 700;
+  font-family: "EB Garamond", serif;
 }
 h1 {
   font-size: 2.752em;
@@ -52,8 +51,11 @@ b {
   font-weight: 700;
 }
 a {
-  color: var(--color-text);
-  text-decoration: underline #ffa1d2;
+  color: var(--color-accent);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline var(--color-accent);
 }
 
 p {

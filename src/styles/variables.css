@@ -1,7 +1,6 @@
 :root {
   --max-width: 1240px;
-  --color-accent: #ffa1d2;
-  --color-accent-shadow: rgba(255, 161, 210, 0.4);
+  --color-accent: #2e40f9;
 }
 
 [data-theme="light"] {
