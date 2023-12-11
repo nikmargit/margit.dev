@@ -1,16 +1,21 @@
 :root {
   --max-width: 1240px;
-  --color-accent: #2e40f9;
+  --yellow: #f8ac26;
+  --blue: #2672f8;
+  --black: #000;
+  --white: #fff;
+  --color-primary: var(--yellow);
+  --color-secondary: var(--blue);
 }
 
 [data-theme="light"] {
-  --color-text: #000;
-  --toggle-transform: translateY(-50%);
-  --toggle-background: #ecebf2;
+  --color-text: var(--black);
+  --color-background: var(--white);
+  --toggle-transform: translateY(-49%);
 }
 
 [data-theme="dark"] {
-  --color-text: #fff;
+  --color-text: var(--white);
+  --color-background: var(--black);
   --toggle-transform: translateY(0%);
-  --toggle-background: #000;
 }

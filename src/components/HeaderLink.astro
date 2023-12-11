@@ -11,6 +11,7 @@ const isActive = href === pathname || href === pathname.replace(/\/$/, "");
 
 <a href={href} class:list={[className, { active: isActive }]} {...props}>
   <slot />
+  <div class="underline"></div>
 </a>
 <style>
   span {
@@ -20,18 +21,25 @@ const isActive = href === pathname || href === pathname.replace(/\/$/, "");
     align-items: center;
     justify-content: center;
     text-decoration: none;
-    background: #fff;
-    width: 6rem;
   }
   a {
     display: inline-block;
     text-decoration: none;
     text-transform: capitalize;
     font-size: 1.3rem;
-    color: #fff;
+    color: var(--color-text);
     padding: 0rem 0.4rem;
   }
-  a.active {
-    text-decoration: underline;
+  a.active .underline {
+    width: 100%;
+  }
+  .underline {
+    height: 2px;
+    width: 0%;
+    background: var(--color-text);
+    transition: width 0.15s ease-in;
+  }
+  a:hover .underline {
+    width: 100%;
   }
 </style>

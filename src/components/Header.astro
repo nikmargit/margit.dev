@@ -1,48 +1,42 @@
 ---
 import HeaderLink from "./HeaderLink.astro";
-import LogoSVG from "./LogoSVG.astro";
 import ColorModeToggleButton from "./ColorModeToggleButton.astro";
+import DashBreak from "./DashBreak.astro";
+import LogoSVG from "./LogoSVG.astro";
 ---
 
 <header>
   <nav>
-    <div class="nav-wrapper">
+    <div class="header-wrapper">
       <h2>
         <a href="/">
           <span class="sr-only">Go to homepage</span>
-          <LogoSVG class="nav-logo" size="70px" />
+          <LogoSVG />
         </a>
       </h2>
-      <HeaderLink href="/">home</HeaderLink>
-      <HeaderLink href="/blog">blog</HeaderLink>
-      <HeaderLink href="/about">about</HeaderLink>
+      <div class="nav-wrapper">
+        <HeaderLink href="/">home</HeaderLink>
+        <HeaderLink href="/blog">blog</HeaderLink>
+        <HeaderLink href="/about">about</HeaderLink>
+        <ColorModeToggleButton />
+      </div>
     </div>
-    <div>
-      <ColorModeToggleButton />
-    </div>
+    <DashBreak />
   </nav>
 </header>
 <style>
-  header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-inline: 1em;
-    /* padding-top: 0.5rem; */
+  nav {
     width: 100%;
-    background: var(--color-accent);
-    background-image: url(/grain.png);
-    padding-block: 0.5rem 0.8rem;
-    --mask: radial-gradient(
-          7.87px at 50% calc(100% - 11.1px),
-          #000 99%,
-          #0000 101%
-        )
-        calc(50% - 12px) 0/24px 100%,
-      radial-gradient(7.87px at 50% calc(100% + 5.1px), #0000 99%, #000 101%)
-        50% calc(100% - 6px) / 24px 100% repeat-x;
-    -webkit-mask: var(--mask);
-    mask: var(--mask);
+    max-width: var(--max-width);
+    margin: auto;
+    padding: 1.6rem 1.6rem;
+  }
+  .header-wrapper {
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    display: flex;
+    margin-bottom: 3rem;
   }
   .nav-wrapper {
     display: flex;
@@ -50,17 +44,12 @@ import ColorModeToggleButton from "./ColorModeToggleButton.astro";
     justify-content: center;
     gap: 2rem;
   }
-  nav {
-    display: flex;
-    width: 100%;
-    max-width: var(--max-width);
-    margin: auto;
-    align-items: center;
-    justify-content: space-between;
-    gap: 2rem;
-  }
   h2 {
     margin: 0;
+    font-size: 1.3rem;
+  }
+  h2 a {
+    color: var(--color-text);
   }
 
   @media screen and (min-width: 768px) {

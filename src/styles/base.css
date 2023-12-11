@@ -1,7 +1,27 @@
+/* ia-writer-mono-latin-400-normal */
+@font-face {
+  font-family: "iA Writer Mono";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400;
+  src: url(https://cdn.jsdelivr.net/fontsource/fonts/ia-writer-mono@latest/latin-400-normal.woff2)
+    format("woff2");
+}
+
+/* ia-writer-mono-latin-700-normal */
+@font-face {
+  font-family: "iA Writer Mono";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 700;
+  src: url(https://cdn.jsdelivr.net/fontsource/fonts/ia-writer-mono@latest/latin-700-normal.woff2)
+    format("woff2");
+}
+
 body {
   margin: 0;
   padding: 0;
-  background: #fff;
+  background: var(--color-background);
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-size: cover;
@@ -11,10 +31,11 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  font-family: "Inter", sans-serif;
+  font-family: "iA Writer Mono", sans-serif;
+  transition: background-color 200ms linear;
 }
 main {
-  padding: 3em 1em;
+  padding: 2.5rem 1.6rem;
   flex: 1;
   max-width: var(--max-width);
   margin: auto;
@@ -29,7 +50,7 @@ h6 {
   color: var(--color-text);
   line-height: 1.2;
   font-weight: 700;
-  font-family: "EB Garamond", serif;
+  font-family: "iA Writer Mono", serif;
 }
 h1 {
   font-size: 2.752em;
@@ -51,11 +72,11 @@ b {
   font-weight: 700;
 }
 a {
-  color: var(--color-accent);
+  color: var(--color-primary);
   text-decoration: none;
 }
 a:hover {
-  text-decoration: underline var(--color-accent);
+  text-decoration: underline var(--color-primary);
 }
 
 p {
