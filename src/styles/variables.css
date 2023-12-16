@@ -12,10 +12,12 @@
   --color-text: var(--black);
   --color-background: var(--white);
   --toggle-transform: translateY(-49%);
+  --color-code: rgba(0, 0, 0, 0.06);
 }
 
 [data-theme="dark"] {
   --color-text: var(--white);
   --color-background: var(--black);
   --toggle-transform: translateY(0%);
+  --color-code: rgba(255, 255, 255, 0.2);
 }

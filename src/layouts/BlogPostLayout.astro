@@ -10,7 +10,7 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 
 <BaseLayout>
   <article>
-    <div class="prose">
+    <div>
       <div class="title">
         <div class="date">
           <FormattedDate date={pubDate} />
@@ -28,3 +28,8 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
     </div>
   </article>
 </BaseLayout>
+<style>
+  article {
+    padding-bottom: 1.2rem;
+  }
+</style>
