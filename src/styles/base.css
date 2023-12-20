@@ -28,9 +28,8 @@ body {
   text-align: left;
   color: var(--color-text);
   font-size: 20px;
+  height: 100%;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
   font-family: "iA Writer Mono", sans-serif;
   transition: background-color 200ms linear;
 }
@@ -133,6 +132,30 @@ ul li::before {
   }
   main {
     padding: 1em;
+  }
+  pre {
+    padding: 0.6em;
+    overflow: scroll;
+  }
+  pre > code {
+    font-size: 16px;
+    word-break: normal;
+    letter-spacing: 0;
+  }
+  h1 {
+    font-size: 2em;
+  }
+  h2 {
+    font-size: 1.8em;
+  }
+  h3 {
+    font-size: 1.6em;
+  }
+  h4 {
+    font-size: 1.5em;
+  }
+  h5 {
+    font-size: 1.05em;
   }
 }
 

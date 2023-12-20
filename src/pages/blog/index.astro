@@ -44,4 +44,14 @@ const posts = (await getCollection("blog")).sort(
   div {
     height: 250px;
   }
+
+  @media screen and (max-width: 768px) {
+    ul {
+      grid-template-columns: 1fr;
+    }
+
+    div {
+      height: auto;
+    }
+  }
 </style>
