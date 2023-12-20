@@ -3,18 +3,16 @@ import BaseHead from "../components/BaseHead.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
-import "@fontsource/atkinson-hyperlegible";
 ---
 
 <html lang="en" data-theme="light">
   <head>
     <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      rel="preload"
-      href="/Atkinson-Hyperlegible-Regular.woff2"
-      as="font"
-      type="font/woff2"
-      crossorigin
+      href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;700&family=Inter:wght@400;600&display=swap"
+      rel="stylesheet"
     />
   </head>
   <body>

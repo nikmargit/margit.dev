@@ -1,0 +1,63 @@
+---
+title: "Async Function in map() Method"
+description: "The JavaScript map method is synchronous, but we will explore the way to make it work with asynchronous functions as well."
+pubDate: "May 27 2020"
+tags: ["javascript", "map"]
+---
+
+> The [`map()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) method **creates a new array** populated with the results of calling a provided function on every element in the calling array.
+
+The JavaScript `map()` method is a **synchronous** higher-order function that allows us to transform elements in an array by applying a provided function to each element. But what happens if we want to use an asynchronous function inside the `map()` method? In this tutorial, we will explore how to work with asynchronous functions in conjunction with `map()` and handle promises correctly.
+
+Let's consider the following example:
+
+```javascript
+const values = ["Hello", undefined, 42];
+
+async function getValueType(value) {
+  return typeof value;
+}
+
+const types = values.map(getValueType);
+
+console.log(types);
+// [Promise, Promise, Promise]
+```
+
+In the above code, `getValueType` is an asynchronous function that returns the type of a given value. When we use this function inside the map() method, we end up with an array of promises.
+
+### Handling Asynchronous Functions in map()
+
+To properly handle asynchronous functions inside the map() method, we might be tempted to rewrite the code like this:
+
+```javascript
+const types = values.map(async (value) => {
+  const type = await getValueType(value);
+  return type;
+});
+
+console.log(types);
+// [Promise, Promise, Promise]
+```
+
+Unfortunately, this approach still results in an array of [promises](https://web.dev/promises/). The `map()` method does not await the execution of the async function provided, causing each promise to resolve in an asynchronous manner.
+
+### Using Promise.all()
+
+To execute all the promises returned by the `map()` method in parallel and wait for them to resolve, we can use the `Promise.all()` method. `Promise.all()` takes an iterable of promises and returns a single promise that resolves to an array of the results of the input promises.
+
+Here's how we can modify the code to use `Promise.all()`:
+
+> The **`Promise.all()`** method takes an iterable of promises as an input, and returns a single `Promise` that resolves to an array of the results of the input promises.
+
+With all that, we can finally write a solution that can work with an asynchronous function.
+
+```javascript
+const types = values.map(getValueType);
+
+Promise.all(types).then((resolvedTypes) => {
+  console.log(resolvedTypes);
+});
+```
+
+By utilizing `Promise.all()`, we ensure that all promises inside the `types` array are executed concurrently, and we wait for all of them to resolve before continuing further. This knowledge can be valuable when dealing with async operations in array transformations using the `map()` method.
