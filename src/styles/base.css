@@ -32,10 +32,12 @@ body {
   min-height: 100vh;
   font-family: "iA Writer Mono", sans-serif;
   transition: background-color 200ms linear;
+  display: flex;
+  flex-direction: column;
 }
 main {
   padding: 2.5rem 1.6rem;
-  flex: 1;
+  width: 100%;
   max-width: var(--max-width);
   margin: auto;
 }
