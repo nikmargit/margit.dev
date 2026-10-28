@@ -1,17 +1,148 @@
 ---
+import Seal from "../components/Seal.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { LINKS } from "../consts";
+import { getPosts } from "../posts";
+
+const posts = await getPosts();
+
+const monthYear = new Intl.DateTimeFormat("en-US", {
+  month: "short",
+  year: "numeric",
+});
 ---
 
 <BaseLayout>
-  <h1>Hey, I'm Nikola Margit</h1>
-  <p>
-    I'm a web developer based in Belgrade, Serbia. Currently, I contribute as a
-    React developer at <a href="https://cake.com/">CAKE.com</a>, where my focus
-    lies in creating seamless user interfaces using React and TypeScript.
-  </p><p>
-    My blog serves as a learning diary in my continuous exploration of new
-    concepts and technologies. It's a space where I document the challenges and
-    insights encountered on my journey through the ever-evolving landscape of
-    web development.
-  </p>
+  <main class="page">
+    <div class="margin seal-wrap"><Seal /></div>
+
+    <header>
+      <h1>Nikola Margit</h1>
+      <p class="role small-caps">Software engineer · Belgrade</p>
+    </header>
+
+    <section class="bio">
+      <p>
+        I build things for the web. Lately that mostly means AI agents and
+        Shopify: wiring LLMs into real workflows, and figuring out where they
+        help and where they don't.
+      </p>
+      <p>This is where I write down what I learn.</p>
+    </section>
+
+    <h2 class="margin label">Writing</h2>
+    <ol class="posts">
+      {
+        posts.map((post) => (
+          <li>
+            <a href={`/blog/${post.id}/`}>
+              <span>{post.data.title}</span>
+              <time datetime={post.data.pubDate.toISOString()}>
+                {monthYear.format(post.data.pubDate)}
+              </time>
+            </a>
+          </li>
+        ))
+      }
+    </ol>
+
+    <footer class="elsewhere small-caps quiet-links">
+      {LINKS.map(({ label, href }) => <a href={href}>{label}</a>)}
+    </footer>
+  </main>
 </BaseLayout>
+
+<style>
+  .seal-wrap {
+    grid-row: 1;
+    padding-top: 6px;
+  }
+
+  h1 {
+    font-weight: 500;
+    font-size: 34px;
+    line-height: 1.2;
+    letter-spacing: 0.02em;
+  }
+
+  .role {
+    color: var(--muted);
+    margin-top: 12px;
+  }
+
+  .bio {
+    margin-top: 56px;
+  }
+
+  .bio p + p {
+    margin-top: 14px;
+  }
+
+  .label {
+    justify-self: end;
+    writing-mode: vertical-rl;
+    margin-top: 88px;
+    padding-top: 6px;
+    font: 500 12px/1 var(--font-gothic);
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .posts {
+    margin-top: 88px;
+    border-top: 1px solid var(--rule);
+  }
+
+  .posts a {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 24px;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--rule);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .posts a:hover {
+    color: var(--accent);
+  }
+
+  .posts time {
+    font: 13px var(--font-gothic);
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  .elsewhere {
+    margin-top: 88px;
+  }
+
+  @media (max-width: 640px) {
+    .seal-wrap {
+      margin-bottom: 32px;
+    }
+
+    h1 {
+      font-size: 30px;
+    }
+
+    .label {
+      justify-self: start;
+      writing-mode: horizontal-tb;
+      margin-top: 64px;
+      padding: 0;
+    }
+
+    .posts {
+      margin-top: 16px;
+    }
+
+    .posts a {
+      flex-direction: column;
+      gap: 2px;
+    }
+  }
+</style>

@@ -1,50 +1,49 @@
 ---
-import BaseHead from "../components/BaseHead.astro";
-import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
+import { Font } from "astro:assets";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
-const { title = SITE_TITLE, descripion = SITE_DESCRIPTION } = Astro.props;
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+  type?: "website" | "article";
+}
+
+const {
+  title,
+  description = SITE_DESCRIPTION,
+  type = "website",
+} = Astro.props;
+
+const fullTitle = title ? `${title} · ${SITE_TITLE}` : SITE_TITLE;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
-<html lang="en" data-theme="light">
+<!doctype html>
+<html lang="en">
   <head>
-    <BaseHead title={title} description={descripion} />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;700&family=Inter:wght@400;600&display=swap"
-      rel="stylesheet"
-    />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate" type="application/rss+xml" title={SITE_TITLE} href="/rss.xml" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#faf7f1" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#1a1816" media="(prefers-color-scheme: dark)" />
+
+    <meta property="og:type" content={type} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta name="twitter:card" content="summary" />
+
+    <Font cssVariable="--font-mincho" preload={[{ subset: "latin", weight: "400" }]} />
+    <Font cssVariable="--font-gothic" />
   </head>
   <body>
-    <script is:inline>
-      function getInitialColorMode() {
-        const persistedColorPreference =
-          window.localStorage.getItem("color-mode");
-        const hasPersistedPreference =
-          typeof persistedColorPreference === "string";
-
-        if (hasPersistedPreference) {
-          return persistedColorPreference;
-        }
-
-        const mql = window.matchMedia("(prefers-color-scheme: dark)");
-        const hasMediaQueryPreference = typeof mql.matches === "boolean";
-        if (hasMediaQueryPreference) {
-          return mql.matches ? "dark" : "light";
-        }
-
-        return "light";
-      }
-
-      document
-        .querySelector("html")
-        .setAttribute("data-theme", getInitialColorMode());
-    </script>
-    <Header title={SITE_TITLE} />
-    <main>
-      <slot />
-    </main>
-    <Footer />
+    <slot />
   </body>
 </html>

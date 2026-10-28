@@ -1,11 +1,145 @@
-@import url(reset.css) layer(reset);
-@import url(variables.css) layer(variables);
-@import url(base.css) layer(base);
+:root {
+  --paper: #faf7f1;
+  --ink: #2a2622;
+  --muted: #8b8276;
+  --rule: #e4dccd;
+  --accent: #c4432b;
+  --code: #f2ece1;
+  --grain: 0.32;
+  --grain-blend: multiply;
 
-@font-face {
-  font-family: "Atkinson Hyperlegible";
-  src: url("/Atkinson-Hyperlegible-Regular.woff2") format("woff2");
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
+  /* Code: ink with a single accent, matching the page */
+  --shiki-foreground: var(--ink);
+  --shiki-background: var(--code);
+  --shiki-token-keyword: var(--accent);
+  --shiki-token-constant: #8a5a2b;
+  --shiki-token-string: #5e6b45;
+  --shiki-token-string-expression: #5e6b45;
+  --shiki-token-comment: var(--muted);
+  --shiki-token-function: var(--ink);
+  --shiki-token-parameter: var(--ink);
+  --shiki-token-punctuation: var(--muted);
+  --shiki-token-link: var(--accent);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #1a1816;
+    --ink: #e6dfd2;
+    --muted: #8d8579;
+    --rule: #302c27;
+    --accent: #e2694d;
+    --code: #221f1c;
+    --grain: 0.18;
+    --grain-blend: screen;
+
+    --shiki-token-constant: #d6a571;
+    --shiki-token-string: #aab98a;
+    --shiki-token-string-expression: #aab98a;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  min-height: 100vh;
+  background: var(--paper);
+  color: var(--ink);
+  font: 18px/1.85 var(--font-mincho);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Washi grain */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: var(--grain);
+  mix-blend-mode: var(--grain-blend);
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .3 0 0 0 0 .26 0 0 0 0 .2 0 0 0 .5 0'/></filter><rect width='220' height='220' filter='url(%23n)'/></svg>");
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--paper);
+}
+
+a {
+  color: inherit;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+:focus-visible {
+  outline: 1px solid var(--accent);
+  outline-offset: 4px;
+}
+
+/* Two-column page: margin for the seal and labels, then the text */
+.page {
+  max-width: 52rem;
+  margin: 0 auto;
+  padding: 16vh 24px 12vh;
+  display: grid;
+  grid-template-columns: 5rem minmax(0, 34rem);
+  column-gap: clamp(24px, 6vw, 72px);
+}
+
+.page > * {
+  grid-column: 2;
+}
+
+.page > .margin {
+  grid-column: 1;
+}
+
+/* Small uppercase gothic used for meta text, labels and links */
+.small-caps {
+  font: 13px/1.6 var(--font-gothic);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.quiet-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+}
+
+.quiet-links a {
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.quiet-links a:hover {
+  color: var(--accent);
+}
+
+@media (max-width: 640px) {
+  .page {
+    grid-template-columns: minmax(0, 1fr);
+    padding-top: 10vh;
+  }
+
+  .page > *,
+  .page > .margin {
+    grid-column: 1;
+  }
 }

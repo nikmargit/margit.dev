@@ -1,20 +1,196 @@
 ---
-import { type CollectionEntry, getCollection } from "astro:content";
-import BlogPostLayout from "../../layouts/BlogPostLayout.astro";
+import { type CollectionEntry, render } from "astro:content";
+import Seal from "../../components/Seal.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getPosts } from "../../posts";
 
 export async function getStaticPaths() {
-  const posts = await getCollection("blog");
+  const posts = await getPosts();
   return posts.map((post) => ({
-    params: { slug: post.slug },
+    params: { slug: post.id },
     props: post,
   }));
 }
+
 type Props = CollectionEntry<"blog">;
 
 const post = Astro.props;
-const { Content } = await post.render();
+const { title, description, pubDate, updatedDate } = post.data;
+const { Content } = await render(post);
+
+const fullDate = new Intl.DateTimeFormat("en-US", { dateStyle: "long" });
 ---
 
-<BlogPostLayout {...post.data}>
-  <Content />
-</BlogPostLayout>
+<BaseLayout title={title} description={description} type="article">
+  <main class="page">
+    <a href="/" class="margin home" aria-label="Home"><Seal size="small" /></a>
+    <a href="/" class="name small-caps">Nikola Margit</a>
+
+    <article>
+      <p class="meta small-caps">
+        <time datetime={pubDate.toISOString()}>{fullDate.format(pubDate)}</time>
+        {
+          updatedDate && (
+            <span>
+              {" · Updated "}
+              <time datetime={updatedDate.toISOString()}>
+                {fullDate.format(updatedDate)}
+              </time>
+            </span>
+          )
+        }
+      </p>
+      <h1>{title}</h1>
+      <div class="prose">
+        <Content />
+      </div>
+    </article>
+
+    <footer class="small-caps quiet-links">
+      <a href="/">← All writing</a>
+    </footer>
+  </main>
+</BaseLayout>
+
+<style>
+  .page {
+    padding-top: 12vh;
+    padding-bottom: 14vh;
+  }
+
+  .home {
+    grid-row: 1;
+    justify-self: end;
+    align-self: center;
+  }
+
+  .name {
+    grid-row: 1;
+    align-self: center;
+    color: var(--muted);
+    text-decoration: none;
+  }
+
+  .name:hover {
+    color: var(--accent);
+  }
+
+  .meta {
+    margin-top: 72px;
+    color: var(--accent);
+  }
+
+  h1 {
+    font-weight: 500;
+    font-size: 36px;
+    line-height: 1.3;
+    letter-spacing: 0.01em;
+    margin: 14px 0 40px;
+  }
+
+  footer {
+    margin-top: 72px;
+  }
+
+  .prose :global(p),
+  .prose :global(ul),
+  .prose :global(ol),
+  .prose :global(blockquote) {
+    margin: 20px 0;
+  }
+
+  .prose :global(h2) {
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 1.4;
+    margin: 56px 0 0;
+  }
+
+  .prose :global(h3) {
+    font-weight: 500;
+    font-size: 19px;
+    line-height: 1.4;
+    margin: 40px 0 0;
+  }
+
+  .prose :global(a) {
+    text-decoration: underline;
+    text-decoration-color: var(--accent);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 4px;
+  }
+
+  .prose :global(a:hover) {
+    color: var(--accent);
+  }
+
+  .prose :global(ul),
+  .prose :global(ol) {
+    padding-left: 1.4em;
+  }
+
+  .prose :global(ul) {
+    list-style: "—  ";
+  }
+
+  .prose :global(ol) {
+    list-style: decimal;
+  }
+
+  .prose :global(li::marker) {
+    color: var(--accent);
+  }
+
+  .prose :global(blockquote) {
+    padding-left: 20px;
+    border-left: 1px solid var(--accent);
+    color: var(--muted);
+  }
+
+  .prose :global(blockquote p) {
+    margin: 0;
+  }
+
+  .prose :global(code) {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 0.8em;
+    background: var(--code);
+    padding: 0.15em 0.4em;
+    border-radius: 2px;
+  }
+
+  .prose :global(pre) {
+    margin: 28px 0;
+    padding: 20px 22px;
+    border-left: 2px solid var(--accent);
+    line-height: 1.7;
+    overflow-x: auto;
+  }
+
+  .prose :global(pre code) {
+    padding: 0;
+    background: none;
+    font-size: 14px;
+  }
+
+  .prose :global(hr) {
+    border: 0;
+    border-top: 1px solid var(--rule);
+    margin: 48px 0;
+  }
+
+  .prose :global(img) {
+    max-width: 100%;
+    height: auto;
+  }
+
+  @media (max-width: 640px) {
+    .home {
+      display: none;
+    }
+
+    h1 {
+      font-size: 30px;
+    }
+  }
+</style>

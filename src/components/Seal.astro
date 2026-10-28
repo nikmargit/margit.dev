@@ -1,0 +1,40 @@
+---
+interface Props {
+  size?: "large" | "small";
+}
+
+const { size = "large" } = Astro.props;
+---
+
+<span class:list={["seal", size]} aria-hidden="true">NM</span>
+
+<style>
+  .seal {
+    --s: 46px;
+    display: grid;
+    place-items: center;
+    width: var(--s);
+    height: var(--s);
+    background: var(--accent);
+    color: var(--paper);
+    border-radius: 3px;
+    transform: rotate(-4deg);
+    box-shadow:
+      inset 0 0 0 3px var(--accent),
+      inset 0 0 0 4.5px var(--paper);
+    font: 500 15px/1 var(--font-mincho);
+    letter-spacing: 0.05em;
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+    opacity: 0.93;
+    user-select: none;
+  }
+
+  .small {
+    --s: 30px;
+    font-size: 10px;
+    box-shadow:
+      inset 0 0 0 2px var(--accent),
+      inset 0 0 0 3px var(--paper);
+  }
+</style>
