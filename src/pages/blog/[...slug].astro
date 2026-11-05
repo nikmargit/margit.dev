@@ -23,8 +23,10 @@ const fullDate = new Intl.DateTimeFormat("en-US", { dateStyle: "long" });
 
 <BaseLayout title={title} description={description} type="article">
   <main class="page">
-    <a href="/" class="margin home" aria-label="Home"><Seal size="small" /></a>
-    <a href="/" class="name small-caps">Nikola Margit</a>
+    <a href="/" class="home">
+      <span class="home-seal"><Seal size="small" /></span>
+      <span class="name small-caps">Nikola Margit</span>
+    </a>
 
     <article>
       <p class="meta small-caps">
@@ -54,25 +56,41 @@ const fullDate = new Intl.DateTimeFormat("en-US", { dateStyle: "long" });
 
 <style>
   .page {
+    --measure: 40rem;
     padding-top: 12vh;
     padding-bottom: 14vh;
   }
 
+  /* One link spanning both columns; seal in the margin, name in the text column */
   .home {
-    grid-row: 1;
-    justify-self: end;
-    align-self: center;
-  }
-
-  .name {
-    grid-row: 1;
-    align-self: center;
-    color: var(--muted);
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: subgrid;
+    align-items: center;
     text-decoration: none;
   }
 
-  .name:hover {
+  .home:focus-visible {
+    outline: none;
+  }
+
+  .home-seal {
+    justify-self: end;
+  }
+
+  .name {
+    justify-self: start;
+    color: var(--muted);
+    transition: color 0.2s;
+  }
+
+  .home:hover .name {
     color: var(--accent);
+  }
+
+  .home:focus-visible .name {
+    outline: 1px solid var(--accent);
+    outline-offset: 4px;
   }
 
   .meta {
@@ -184,8 +202,20 @@ const fullDate = new Intl.DateTimeFormat("en-US", { dateStyle: "long" });
     height: auto;
   }
 
+  /* Let code use some of the empty space on the right */
+  @media (min-width: 960px) {
+    .prose :global(pre) {
+      margin-right: -4rem;
+    }
+  }
+
   @media (max-width: 640px) {
     .home {
+      grid-column: 1;
+      display: block;
+    }
+
+    .home-seal {
       display: none;
     }
 

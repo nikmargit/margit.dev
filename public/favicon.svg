@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect x="1" y="1" width="30" height="30" rx="3" fill="#c4432b"/>
-  <rect x="3.5" y="3.5" width="25" height="25" rx="1.5" fill="none" stroke="#faf7f1" stroke-width="1.2"/>
-  <text x="16" y="14.6" text-anchor="middle" font-family="'Hiragino Mincho ProN','Yu Mincho',Georgia,serif" font-size="10.5" font-weight="600" fill="#faf7f1">N</text>
-  <text x="16" y="25.2" text-anchor="middle" font-family="'Hiragino Mincho ProN','Yu Mincho',Georgia,serif" font-size="10.5" font-weight="600" fill="#faf7f1">M</text>
+  <rect x="1" y="1" width="30" height="30" rx="3" fill="#b83d26"/>
+  <rect x="3.5" y="3.5" width="25" height="25" rx="1.5" fill="none" stroke="#fbf9f5" stroke-width="1.2"/>
+  <text x="16" y="14.6" text-anchor="middle" font-family="'Hiragino Mincho ProN','Yu Mincho',Georgia,serif" font-size="10.5" font-weight="600" fill="#fbf9f5">N</text>
+  <text x="16" y="25.2" text-anchor="middle" font-family="'Hiragino Mincho ProN','Yu Mincho',Georgia,serif" font-size="10.5" font-weight="600" fill="#fbf9f5">M</text>
 </svg>

@@ -26,7 +26,7 @@ console.log(types);
 
 In the above code, `getValueType` is an asynchronous function that returns the type of a given value. When we use this function inside the map() method, we end up with an array of promises.
 
-### Handling Asynchronous Functions in map()
+## Handling Asynchronous Functions in map()
 
 To properly handle asynchronous functions inside the map() method, we might be tempted to rewrite the code like this:
 
@@ -42,7 +42,7 @@ console.log(types);
 
 Unfortunately, this approach still results in an array of [promises](https://web.dev/promises/). The `map()` method does not await the execution of the async function provided, causing each promise to resolve in an asynchronous manner.
 
-### Using Promise.all()
+## Using Promise.all()
 
 To execute all the promises returned by the `map()` method in parallel and wait for them to resolve, we can use the `Promise.all()` method. `Promise.all()` takes an iterable of promises and returns a single promise that resolves to an array of the results of the input promises.
 
