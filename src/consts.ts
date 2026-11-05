@@ -1,6 +1,6 @@
 export const SITE_TITLE = "Nikola Margit";
 export const SITE_DESCRIPTION =
-  "Nikola Margit, software engineer in Belgrade. Notes on AI agents, Shopify, and building for the web.";
+  "Nikola Margit, senior full-stack engineer at Gorgias building conversational AI agents.";
 
 export const LINKS = [
   { label: "GitHub", href: "https://github.com/nikmargit" },

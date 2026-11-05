@@ -4,7 +4,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import { LINKS } from "../consts";
 import { getPosts } from "../posts";
 
-const posts = await getPosts();
+const posts = (await getPosts()).filter((post) => !post.data.unlisted);
+const hasPosts = posts.length > 0;
 
 const monthYear = new Intl.DateTimeFormat("en-US", {
   month: "short",
@@ -18,33 +19,41 @@ const monthYear = new Intl.DateTimeFormat("en-US", {
 
     <header>
       <h1>Nikola Margit</h1>
-      <p class="role small-caps">Software engineer · Belgrade</p>
+      <p class="role small-caps">Senior software engineer · Belgrade</p>
     </header>
 
     <section class="bio">
       <p>
-        I build things for the web. Lately that mostly means AI agents and
-        Shopify: wiring LLMs into real workflows, and figuring out where they
-        help and where they don't.
+        I'm a full-stack engineer at <a href="https://www.gorgias.com/">Gorgias</a>,
+        building conversational AI agents that help customers set up and
+        configure their apps through natural language.
       </p>
-      <p>This is where I write down what I learn.</p>
+      <p>
+        I've been building for the web since 2015, these days mostly with React,
+        TypeScript and Go.
+      </p>
+      {hasPosts && <p>This is where I write down what I learn.</p>}
     </section>
 
-    <h2 class="margin label">Writing</h2>
-    <ol class="posts">
-      {
-        posts.map((post) => (
-          <li>
-            <a href={`/blog/${post.id}/`}>
-              <span>{post.data.title}</span>
-              <time datetime={post.data.pubDate.toISOString()}>
-                {monthYear.format(post.data.pubDate)}
-              </time>
-            </a>
-          </li>
-        ))
-      }
-    </ol>
+    {
+      hasPosts && (
+        <>
+          <h2 class="margin label">Writing</h2>
+          <ol class="posts">
+            {posts.map((post) => (
+              <li>
+                <a href={`/blog/${post.id}/`}>
+                  <span>{post.data.title}</span>
+                  <time datetime={post.data.pubDate.toISOString()}>
+                    {monthYear.format(post.data.pubDate)}
+                  </time>
+                </a>
+              </li>
+            ))}
+          </ol>
+        </>
+      )
+    }
 
     <footer class="elsewhere small-caps quiet-links">
       {LINKS.map(({ label, href }) => <a href={href}>{label}</a>)}
@@ -76,6 +85,17 @@ const monthYear = new Intl.DateTimeFormat("en-US", {
 
   .bio p + p {
     margin-top: 14px;
+  }
+
+  .bio a {
+    text-decoration: underline;
+    text-decoration-color: var(--accent);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 4px;
+  }
+
+  .bio a:hover {
+    color: var(--accent);
   }
 
   .label {
